@@ -10,21 +10,20 @@ import meetkunde.model.Cirkel;
 public class MeetkundeLauncher {
 
     public static void main(String[] args) {
-        Cirkel cirkel = new Cirkel(2, 0, 0, "blauw");
+        Cirkel[] mijnCirkelArray = new Cirkel[3];
 
-        Cirkel eenheidscirkel = new Cirkel();
+        mijnCirkelArray[0] = new Cirkel(3, 1, 4, "groen");
+        mijnCirkelArray[1] = new Cirkel();
+        mijnCirkelArray[2] = new Cirkel(6);
 
-        Cirkel cirkel2 = new Cirkel(6);
-
-        System.out.println(cirkel.geefOmtrek());
-        System.out.println(cirkel.geefOppervlakte());
-
-        System.out.println(eenheidscirkel.geefOmtrek());
-        System.out.println(eenheidscirkel.geefOppervlakte());
-
-        System.out.println(cirkel2.geefOmtrek());
-        System.out.println(cirkel2.geefOppervlakte());
-        System.out.println(Cirkel.geefDefinitie());
+        for (int arrayTeller = 0; arrayTeller < mijnCirkelArray.length;
+             arrayTeller++) {
+            System.out.println(mijnCirkelArray[arrayTeller].geefOmtrek());
+            System.out.println(mijnCirkelArray[arrayTeller].geefOppervlakte());
+            System.out.println(mijnCirkelArray[arrayTeller].getKleur());
+            System.out.println(mijnCirkelArray[arrayTeller].vertelOverGrootte());
+            System.out.println();
+        }
     }
 
 }

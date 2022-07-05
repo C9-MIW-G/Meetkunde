@@ -5,7 +5,7 @@ package meetkunde.model;
  * <p>
  * Algemene eigenschappen die alle figuren delen
  */
-public class Figuur {
+public abstract class Figuur {
     protected static final double GRENSWAARDE_GROOT_FIGUUR = 100.0;
 
     private static final String DEFAULT_KLEUR = "paars";
@@ -24,15 +24,9 @@ public class Figuur {
         return "Een figuur is een verzameling punten";
     }
 
-    public double geefOmtrek() {
-        // Het spijt me ik weet niet beter
-        return 0;
-    }
+    public abstract double geefOmtrek();
 
-    public double geefOppervlakte() {
-        // Het spijt me ik weet niet beter
-        return 0;
-    }
+    public abstract double geefOppervlakte();
 
     public String vertelOverGrootte() {
         if (geefOppervlakte() > GRENSWAARDE_GROOT_FIGUUR) {

@@ -5,19 +5,17 @@ package meetkunde.model;
  * <p>
  * Bevat alle eigenschappen van een cirkel
  */
-public class Cirkel {
+public class Cirkel extends Figuur {
     private static final String DEFAULT_KLEUR = "regenboog";
     private static final int DEFAULT_STRAAL = 1;
-    private static final double GRENSWAARDE_GROOT_FIGUUR = 100.0;
 
     private double straal;
     private Punt middelpunt;
-    private String kleur;
 
     public Cirkel(double straal, Punt middelpunt, String kleur) {
+        super(kleur);
         this.setStraal(straal);
         this.middelpunt = middelpunt;
-        this.kleur = kleur;
     }
 
     public Cirkel(double straal) {
@@ -28,25 +26,24 @@ public class Cirkel {
         this(DEFAULT_STRAAL);
     }
 
+    @Override
     public double geefOmtrek() {
         return 2 * Math.PI * straal;
     }
 
+    @Override
     public double geefOppervlakte() {
         return Math.PI * straal * straal;
-    }
-
-    public String vertelOverGrootte() {
-        if (geefOppervlakte() > GRENSWAARDE_GROOT_FIGUUR) {
-            return "Ik ben groot!!!";
-        } else {
-            return "Ik ben klein!!!";
-        }
     }
 
     public static String geefDefinitie() {
         return "Een cirkel is een verzameling punten, " +
                 "die allemaal dezelfde afstand tot een middelpunt hebben.";
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s\nStraal: %s\nMiddelpunt: %s", super.toString(), this.straal, this.middelpunt);
     }
 
     public double getStraal() {
@@ -70,11 +67,4 @@ public class Cirkel {
         this.middelpunt = middelpunt;
     }
 
-    public String getKleur() {
-        return kleur;
-    }
-
-    public void setKleur(String kleur) {
-        this.kleur = kleur;
-    }
 }

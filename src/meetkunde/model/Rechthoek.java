@@ -5,22 +5,21 @@ package meetkunde.model;
  * <p>
  * Bevat alle eigenschappen van een rechthoek
  */
-public class Rechthoek {
-    public static final int DEFAULT_BREEDTE = 0;
-    private static final double GRENSWAARDE_GROOT_FIGUUR = 100.0;
+public class Rechthoek extends Figuur {
     public static final String DEFAULT_KLEUR = "groen";
+
     public static final int DEFAULT_LENGTE = 0;
+    public static final int DEFAULT_BREEDTE = 0;
 
     private double lengte;
     private double breedte;
     private Punt hoekpuntLinksBoven;
-    private String kleur;
 
     public Rechthoek(double lengte, double breedte, Punt hoekpuntLinksBoven, String kleur) {
+        super(kleur);
         this.lengte = lengte;
         this.breedte = breedte;
         this.hoekpuntLinksBoven = hoekpuntLinksBoven;
-        this.kleur = kleur;
     }
 
     public Rechthoek(double lengte, double breedte) {
@@ -35,20 +34,19 @@ public class Rechthoek {
         return "Een rechthoek is een vierhoek met vier rechte hoeken";
     }
 
+    @Override
     public double geefOmtrek() {
         return 2 * (lengte + breedte);
     }
 
+    @Override
     public double geefOppervlakte() {
         return lengte * breedte;
     }
 
-    public String vertelOverGrootte() {
-        if (geefOppervlakte() > GRENSWAARDE_GROOT_FIGUUR) {
-            return "Ik ben groot!!!";
-        } else {
-            return "Ik ben klein!!!";
-        }
+    @Override
+    public String toString() {
+        return String.format("%s\nLengte: %s\nBreedte: %s\nHoekpuntLinksBoven: %s", super.toString(), this.lengte, this.breedte, this.hoekpuntLinksBoven, this.kleur);
     }
 
     public double getLengte() {
@@ -73,13 +71,5 @@ public class Rechthoek {
 
     public void setHoekpuntLinksBoven(Punt hoekpuntLinksBoven) {
         this.hoekpuntLinksBoven = hoekpuntLinksBoven;
-    }
-
-    public String getKleur() {
-        return kleur;
-    }
-
-    public void setKleur(String kleur) {
-        this.kleur = kleur;
     }
 }

@@ -17,8 +17,6 @@ public class LocalDateLauncher {
         LocalDate beginVan2021 = LocalDate.parse("2021-01-01");
         System.out.println(beginVan2021.getDayOfWeek());
 
-        Lo
-
         LocalDate koningsdag2021 = LocalDate.of(2021, Month.JULY, 5);
         LocalDate koningsdag2022 = koningsdag2021.plusYears(1);
         if (koningsdag2022.isAfter(LocalDate.now()) || koningsdag2022.equals(LocalDate.now())) {

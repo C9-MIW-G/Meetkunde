@@ -13,30 +13,28 @@ import java.util.Scanner;
 public class MeetkundeLauncher {
 
     public static void main(String[] args) {
-        Oppervlak mijnA4 = new Oppervlak(20, 30);
-        mijnA4.voegFiguurToe(new Cirkel());
-        mijnA4.voegFiguurToe(new Rechthoek());
-
-        System.out.println(mijnA4);
-
-        ArrayList<Cirkel> mijnCirkels = new ArrayList<>();
-
-        mijnCirkels.add(new Cirkel(3, new Punt(1, 4), "groen"));
-        mijnCirkels.add(new Cirkel());
-        mijnCirkels.add(new Cirkel(6));
-
-//        System.out.printf("Er zijn nu %d cirkels.\n", mijnCirkels.size());
-//        System.out.printf("De straal van de tweede cirkel is: %f.\n", mijnCirkels.get(1).getStraal());
-//        System.out.println(mijnCirkels.remove(2));
-//
-//        for (Cirkel mijnCirkel : mijnCirkels) {
-//            System.out.println(mijnCirkel);
-//        }
+        Oppervlak oppervlak = new Oppervlak(10, 7);
+        oppervlak.voegFiguurToe(new Rechthoek(3, 3, new Punt(0, 7), "rood"));
+        oppervlak.voegFiguurToe(new Rechthoek(3, 2, new Punt(0, 4), "geel"));
+        oppervlak.voegFiguurToe(new Rechthoek(5, 2, new Punt(0, 2), "groen"));
+        oppervlak.voegFiguurToe(new Rechthoek(5, 2, new Punt(3, 7), "paars"));
+        oppervlak.voegFiguurToe(new Rechthoek(5, 4, new Punt(5, 7), "oranje"));
+        oppervlak.voegFiguurToe(new Rechthoek(5, 3, new Punt(5, 3), "blauw"));
+        oppervlak.voegFiguurToe(new Rechthoek(7, 7, new Punt(5, 3), "blauw"));
+        oppervlak.voegFiguurToe(new Cirkel(4));
+        System.out.println(oppervlak);
     }
 
     public static void toonInformatie(Figuur figuur) {
         System.out.println(figuur.geefOmtrek());
         System.out.println(figuur.vertelOverGrootte());
+    }
+
+    public static void toonInformatieAlleFiguren(ArrayList<Figuur> figuren) {
+        for (Figuur figuur : figuren) {
+            toonInformatie(figuur);
+            System.out.println();
+        }
     }
 
 }

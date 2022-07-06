@@ -1,6 +1,7 @@
 package meetkunde.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * @author Vincent Velthuizen <v.r.velthuizen@pl.hanze.nl>
@@ -19,35 +20,35 @@ public class Oppervlak {
     }
 
     public void voegFiguurToe(Figuur figuur) {
-        mijnFiguren.add(figuur);
+        if (figuur.pastInOppervlak(lengte, breedte)) {
+            mijnFiguren.add(figuur);
+            System.out.println("Figuur is toegevoegd.");
+        } else {
+            System.out.println("Figuur past niet.");
+        }
     }
 
-    private boolean figuurPastAlsVormInOppervlak(Figuur figuur) {
-        boolean eenReturn = false;
+    public ArrayList<Figuur> geefFigurenMetGrotereOppervlakte(double grenswaarde) {
+        ArrayList<Figuur> gevraagdeFiguren = new ArrayList<>();
 
-        if (figuur instanceof Rechthoek) {
-            // figuur is een Rechthoek
-            if (((Rechthoek) figuur).getLengte() <= lengte && ((Rechthoek) figuur).getBreedte() <= breedte) {
-                eenReturn = true;
-            }
-        } else if (figuur instanceof Cirkel) {
-            // figuur is een Cirkel
-            if (((Cirkel) figuur).getStraal() <= breedte / 2) {
-                eenReturn = true;
+        for (Figuur figuur : mijnFiguren) {
+            if (figuur.geefOppervlakte() > grenswaarde) {
+                gevraagdeFiguren.add(figuur);
             }
         }
 
-        return eenReturn;
+        return gevraagdeFiguren;
     }
 
     @Override
     public String toString() {
-        String eenReturn = "";
+        StringBuilder eenReturn = new StringBuilder();
 
+        Collections.sort(mijnFiguren);
         for (Figuur figuur : mijnFiguren) {
-            eenReturn += figuur.toString() + "\n\n";
+            eenReturn.append(figuur.toString()).append("\n\n");
         }
 
-        return eenReturn;
+        return eenReturn.toString();
     }
 }

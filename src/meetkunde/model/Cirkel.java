@@ -36,6 +36,11 @@ public class Cirkel extends Figuur {
         return Math.PI * straal * straal;
     }
 
+    @Override
+    public boolean pastInOppervlak(double lengte, double breedte) {
+        return straal <= lengte / 2 && straal <= breedte / 2;
+    }
+
     public static String geefDefinitie() {
         return "Een cirkel is een verzameling punten, " +
                 "die allemaal dezelfde afstand tot een middelpunt hebben.";

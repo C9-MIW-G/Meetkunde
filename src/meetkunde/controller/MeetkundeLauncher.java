@@ -42,12 +42,26 @@ public class MeetkundeLauncher {
         }
 
         if (connection != null) {
-            System.out.println("De verbinding is gemaakt!");
-            String sql = "INSERT INTO punt VALUES (3, 5);";
+//            System.out.println("De verbinding is gemaakt!");
+//            String sql = "INSERT INTO punt VALUES (3, 5);";
+//            try {
+//                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+//                preparedStatement.executeUpdate();
+//                connection.close();
+//            } catch (SQLException sqlException) {
+//                System.out.println("SQL Exception: " + sqlException.getMessage());
+//            }
+
+            String sql = "SELECT xcoordinaat, ycoordinaat FROM punt WHERE xcoordinaat > ?;";
             try {
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
-                preparedStatement.executeUpdate();
-                connection.close();
+//                preparedStatement.setInt(1, 0);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    double xCoordinaat = resultSet.getDouble(1);
+                    double yCoordinaat = resultSet.getDouble(2);
+                    System.out.println(new Punt(xCoordinaat, yCoordinaat));
+                }
             } catch (SQLException sqlException) {
                 System.out.println("SQL Exception: " + sqlException.getMessage());
             }

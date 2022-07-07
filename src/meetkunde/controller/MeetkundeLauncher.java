@@ -4,6 +4,7 @@ import meetkunde.model.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,23 +19,12 @@ import java.util.Scanner;
 public class MeetkundeLauncher {
 
     public static void main(String[] args) {
-        ArrayList<String> regelsUitBestand = new ArrayList<>();
+        ArrayList<Rechthoek> rechthoeken = new ArrayList<>();
         File rechthoekenBestand = new File("resources/Rechthoek.csv");
 
-        try {
-            Scanner bestandScanner = new Scanner(rechthoekenBestand);
+        try(Scanner bestandScanner = new Scanner(rechthoekenBestand)){
             while (bestandScanner.hasNextLine()) {
-                regelsUitBestand.add(bestandScanner.nextLine());
-            }
-        } catch (FileNotFoundException fileNotFoundException) {
-            System.out.println("Het bestand kon niet gevonden worden.");
-        }
-
-        if (regelsUitBestand.size() > 0) {
-            ArrayList<Rechthoek> rechthoeken = new ArrayList<>();
-
-            for (String regel : regelsUitBestand) {
-                String[] regelWaarden = regel.split(",");
+                String[] regelWaarden = bestandScanner.nextLine().split(",");
 
                 double lengte = Double.parseDouble(regelWaarden[0]);
                 double breedte = Double.parseDouble(regelWaarden[1]);
@@ -44,10 +34,18 @@ public class MeetkundeLauncher {
 
                 rechthoeken.add(new Rechthoek(lengte, breedte, new Punt(xCoordinaat, yCoordinaat), kleur));
             }
+        } catch (FileNotFoundException fileNotFoundException) {
+            System.out.println("Het bestand kon niet gevonden worden.");
+        }
 
+        File uitvoerBestand = new File("resources/Rechthoeken?.txt");
+        try (PrintWriter printWriter = new PrintWriter(uitvoerBestand)) {
             for (Rechthoek rechthoek : rechthoeken) {
-                toonInformatie(rechthoek);
+                printWriter.println(rechthoek);
+                printWriter.println();
             }
+        } catch (FileNotFoundException fileNotFoundException) {
+            System.out.println("Het bestand kon niet worden aangemaakt.");
         }
     }
 

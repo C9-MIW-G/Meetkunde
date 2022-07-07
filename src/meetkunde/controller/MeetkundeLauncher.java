@@ -1,5 +1,7 @@
 package meetkunde.controller;
 
+import meetkunde.database.DBaccess;
+import meetkunde.database.PuntDAO;
 import meetkunde.model.*;
 
 import java.io.File;
@@ -17,55 +19,17 @@ import java.util.Scanner;
  * Gebruik mijn Meetkunde code en laat zien dat het allemaal netjes werkt.
  */
 public class MeetkundeLauncher {
-    private static final String MYSQL_DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String PREFIX_CONNECTION_URL = "jdbc:mysql://localhost:3306/";
-    private static final String CONNECTION_SETTINGS = "?useSSL=false" +
-            "&allowPublicKeyRetrieval=true" +
-            "&useJDBCCompliantTimezoneShift=true" +
-            "&useLegacyDatetimeCode=false" +
-            "&serverTimezone=UTC";
 
     public static void main(String[] args) {
         String databaseName = "Figuren";
         String dbUser = "userFiguren";
         String dbPassword = "userFigurenPW";
 
-        String connectionUrl = PREFIX_CONNECTION_URL + databaseName + CONNECTION_SETTINGS;
-        Connection connection = null;
-        try {
-            Class.forName(MYSQL_DRIVER);
-            connection = DriverManager.getConnection(connectionUrl, dbUser, dbPassword);
-        } catch (ClassNotFoundException classNotFoundException) {
-            System.out.println("Driver niet gevonden");
-        } catch (SQLException sqlException) {
-            System.out.println("SQL Exception: " + sqlException.getMessage());
-        }
+        DBaccess dBaccess = new DBaccess(databaseName, dbUser, dbPassword);
+        dBaccess.openConnection();
 
-        if (connection != null) {
-//            System.out.println("De verbinding is gemaakt!");
-//            String sql = "INSERT INTO punt VALUES (3, 5);";
-//            try {
-//                PreparedStatement preparedStatement = connection.prepareStatement(sql);
-//                preparedStatement.executeUpdate();
-//                connection.close();
-//            } catch (SQLException sqlException) {
-//                System.out.println("SQL Exception: " + sqlException.getMessage());
-//            }
-
-            String sql = "SELECT xcoordinaat, ycoordinaat FROM punt WHERE xcoordinaat > ?;";
-            try {
-                PreparedStatement preparedStatement = connection.prepareStatement(sql);
-//                preparedStatement.setInt(1, 0);
-                ResultSet resultSet = preparedStatement.executeQuery();
-                while (resultSet.next()) {
-                    double xCoordinaat = resultSet.getDouble(1);
-                    double yCoordinaat = resultSet.getDouble(2);
-                    System.out.println(new Punt(xCoordinaat, yCoordinaat));
-                }
-            } catch (SQLException sqlException) {
-                System.out.println("SQL Exception: " + sqlException.getMessage());
-            }
-        }
+        PuntDAO puntDAO = new PuntDAO(dBaccess);
+        System.out.println(puntDAO.getPunten());
     }
 
     public static void toonInformatie(Figuur figuur) {

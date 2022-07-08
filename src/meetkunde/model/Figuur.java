@@ -53,4 +53,8 @@ public abstract class Figuur implements Comparable<Figuur>, ToelaatbaarInOppervl
             return 0;
         }
     }
+
+    public String getKleur() {
+        return kleur;
+    }
 }

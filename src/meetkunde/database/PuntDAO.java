@@ -8,42 +8,42 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class PuntDAO  {
-    
-    private DBaccess dBaccess;
+public class PuntDAO extends AbstractDAO {
     
     public PuntDAO(DBaccess dBaccess) {
-        this.dBaccess = dBaccess;
+        super(dBaccess);
     }
 
     public ArrayList<Punt> getPunten() {
         ArrayList<Punt> puntenLijst = new ArrayList<>();
         String sql = "SELECT * FROM punt;";
         try {
-            PreparedStatement preparedStatement = 
-                dBaccess.getConnection().prepareStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            setupPreparedStatement(sql);
+            ResultSet resultSet = executeSelectStatement();
             while (resultSet.next()) {
                 Punt punt = new Punt(resultSet.getDouble("xcoordinaat"),
                         resultSet.getDouble("ycoordinaat"));
                 puntenLijst.add(punt);
             }
         } catch (SQLException sqlFout) {
-            System.out.println(sqlFout);
+            toonSQLFoutmelding(sqlFout);
         }
         return puntenLijst;
+    }
+
+    private void toonSQLFoutmelding(SQLException sqlFout) {
+        System.out.println(sqlFout);
     }
 
     public void slaPuntOp(Punt punt) {
         String sql = "INSERT INTO punt VALUES(?, ?)";
         try {
-            PreparedStatement preparedStatement = 
-                dBaccess.getConnection().prepareStatement(sql);
+            setupPreparedStatement(sql);
             preparedStatement.setDouble(1, punt.getxCoordinaat());
             preparedStatement.setDouble(2, punt.getyCoordinaat());
-            preparedStatement.executeUpdate();
+            executeManipulateStatement();
         } catch (SQLException sqlFout) {
-            System.out.println(sqlFout);
+            toonSQLFoutmelding(sqlFout);
         }
     }
 }

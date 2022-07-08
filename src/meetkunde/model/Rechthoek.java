@@ -11,9 +11,9 @@ public class Rechthoek extends Figuur {
     public static final int DEFAULT_LENGTE = 0;
     public static final int DEFAULT_BREEDTE = 0;
 
-    private double lengte;
-    private double breedte;
-    private Punt hoekpuntLinksBoven;
+    private final double lengte;
+    private final double breedte;
+    private final Punt hoekpuntLinksBoven;
 
     public Rechthoek(double lengte, double breedte, Punt hoekpuntLinksBoven, String kleur) {
         super(kleur);
@@ -51,30 +51,6 @@ public class Rechthoek extends Figuur {
 
     @Override
     public String toString() {
-        return String.format("%s\nLengte: %s\nBreedte: %s\nHoekpuntLinksBoven: %s", super.toString(), this.lengte, this.breedte, this.hoekpuntLinksBoven, this.kleur);
-    }
-
-    public double getLengte() {
-        return lengte;
-    }
-
-    public void setLengte(double lengte) {
-        this.lengte = lengte;
-    }
-
-    public double getBreedte() {
-        return breedte;
-    }
-
-    public void setBreedte(double breedte) {
-        this.breedte = breedte;
-    }
-
-    public Punt getHoekpuntLinksBoven() {
-        return hoekpuntLinksBoven;
-    }
-
-    public void setHoekpuntLinksBoven(Punt hoekpuntLinksBoven) {
-        this.hoekpuntLinksBoven = hoekpuntLinksBoven;
+        return String.format("%s\nLengte: %s\nBreedte: %s\nHoekpuntLinksBoven: %s", super.toString(), this.lengte, this.breedte, this.hoekpuntLinksBoven);
     }
 }

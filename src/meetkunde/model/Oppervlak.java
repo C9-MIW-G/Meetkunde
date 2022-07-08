@@ -9,9 +9,9 @@ import java.util.Collections;
  * Een plek om figuren op te plaatsen
  */
 public class Oppervlak {
-    private double lengte;
-    private double breedte;
-    private ArrayList<Figuur> mijnFiguren;
+    private final double lengte;
+    private final double breedte;
+    private final ArrayList<Figuur> mijnFiguren;
 
     public Oppervlak(double lengte, double breedte) {
         this.lengte = lengte;

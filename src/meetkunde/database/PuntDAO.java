@@ -1,9 +1,7 @@
 package meetkunde.database;
 
-import meetkunde.database.DBaccess;
 import meetkunde.model.Punt;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -32,7 +30,7 @@ public class PuntDAO extends AbstractDAO {
     }
 
     private void toonSQLFoutmelding(SQLException sqlFout) {
-        System.out.println(sqlFout);
+        System.out.println("SQL foutmelding: " + sqlFout.getMessage());
     }
 
     public void slaPuntOp(Punt punt) {

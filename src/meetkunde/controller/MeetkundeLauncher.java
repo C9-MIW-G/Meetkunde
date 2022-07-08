@@ -2,17 +2,9 @@ package meetkunde.controller;
 
 import meetkunde.database.CirkelDAO;
 import meetkunde.database.DBaccess;
-import meetkunde.database.PuntDAO;
 import meetkunde.model.*;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
 /**
  * @author Vincent Velthuizen <v.r.velthuizen@pl.hanze.nl>

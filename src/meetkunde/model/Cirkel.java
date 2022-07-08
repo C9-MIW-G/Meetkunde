@@ -10,7 +10,7 @@ public class Cirkel extends Figuur {
     private static final int DEFAULT_STRAAL = 1;
 
     private double straal;
-    private Punt middelpunt;
+    private final Punt middelpunt;
 
     public Cirkel(double straal, Punt middelpunt, String kleur) {
         super(kleur);
@@ -55,7 +55,7 @@ public class Cirkel extends Figuur {
         return straal;
     }
 
-    public void setStraal(double straal) {
+    private void setStraal(double straal) {
         if (straal <= 0) {
             throw new IllegalArgumentException("De straal moet positief zijn.");
         }
@@ -64,10 +64,6 @@ public class Cirkel extends Figuur {
 
     public Punt getMiddelpunt() {
         return middelpunt;
-    }
-
-    public void setMiddelpunt(Punt middelpunt) {
-        this.middelpunt = middelpunt;
     }
 
 }
